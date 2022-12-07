@@ -1,10 +1,13 @@
 
 const fs = require('fs')
 
+
 class Contenedor {
-    constructor(file) {
+
+    constructor( file ) {
         this.file = file
     }
+
 
     async save(product) {
         const productos = await this.getAll()
@@ -24,6 +27,7 @@ class Contenedor {
         }
     }
 
+
     async saveFile(file, productos) {
         try {
             await fs.promises.writeFile(
@@ -33,6 +37,7 @@ class Contenedor {
             console.log(`Error: ${err}`)
         }
     }
+
 
     async getById(id) {
         const productos = await this.getAll()
@@ -45,6 +50,7 @@ class Contenedor {
         }
     }
 
+
     async getAll() {
         try {
             const productos = await fs.promises.readFile(this.file, 'utf-8')
@@ -54,6 +60,7 @@ class Contenedor {
             console.log(`Error: ${err}`)
         }
     }
+
 
     async deleteById(id) {
         let productos = await this.getAll()
@@ -67,10 +74,12 @@ class Contenedor {
         }
     }
 
+
     async deleteAll() {
         await this.saveFile(this.file, [])
     }
 
 }
+
 
 module.exports = Contenedor
